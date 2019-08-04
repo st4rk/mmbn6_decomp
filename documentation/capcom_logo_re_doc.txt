@@ -1,0 +1,136 @@
+ 0x3D033C08
+ 0x3F053E02
+
+
+ void *conf_display()
+{
+  s_unknown_1 *g_struct; // r10
+  int io_conf_1; // r5
+  void *result; // r0
+  _WORD *special_effect; // r5
+
+  io_conf_1 = g_struct->disp_mosaic_bg_conf_200AC40;
+  IO_MOSAIC = *(_WORD *)(io_conf_1 + 2);        // set mosaic mode
+  memcpy32((void *)(io_conf_1 + 4), &IO_BG0CNT, 0x38u);// configure BG
+  result = g_struct->window_conf_200F3A0;
+  sub_800092A(result, &IO_WIN0H, 0xCu);
+  special_effect = g_struct->special_effect_2009740;
+  BLDCNT = *(_DWORD *)special_effect;
+  BLDY = special_effect[2];
+  DISPCNT = *(_WORD *)g_struct->disp_mosaic_bg_conf_200AC40;
+  return result;
+}
+
+
+typedef struct s_capcom_logo {
+	unsigned char state; // current state in the state machine
+	unsigned char unk_2;
+	unsigned char unk_3;
+	unsigned char unk_4;
+	unsigned char logo_tmr;
+	unsigned char unk_6;
+	unsigned char unk_7;
+	unsigned char unk_8;	
+};
+
+
+typedef struct s_lcd_bg_io_conf {
+	unsigned short display_cnt;
+	unsigned short mosaic_size;
+	unsigned short background_cnt0;
+	unsigned short background_cnt1;
+	unsigned short background_cnt2;
+	unsigned short background_cnt3;
+	unsigned short bg_0_hofs;
+	unsigned short bg_0_vofs;
+	unsigned short bg_1_hofs;
+	unsigned short bg_1_vofs;
+	unsigned short bg_2_hofs;
+	unsigned short bg_2_vofs;
+	unsigned short bg_3_hofs;
+	unsigned short bg_3_vofs;
+	unsigned short bg_2_pa;
+	unsigned short bg_2_pb;
+	unsigned short bg_2_pc;
+	unsigned short bg_2_pd;
+	unsigned int bg2x;
+	unsigned int bg2y;
+	unsigned short bg_3_pa;
+	unsigned short bg_3_pb;
+	unsigned short bg_3_pc;
+	unsigned short bg_3_pd;
+	unsigned int bg3x;
+	unsigned int bg3y;
+} s_lcd_io_conf;
+
+
+typedef struct s_window_io_conf {
+	unsigned short window_0_h;
+	unsigned short window_1_h;
+	unsigned short window_0_v;
+	unsigned short window_1_v;
+	unsigned short window_in;
+	unsigned short window_out;
+} s_window_io_conf;
+
+typedef struct s_blending_io_conf {
+	unsigned short blending_cnt;
+	unsigned short blending_alpha;
+	unsigned short blending_brightness;
+} s_blending_io_conf;
+
+typedef struct s_bitmap_info
+{
+  unsigned int src;
+  unsigned int final_dst;
+  unsigned int decomp_dst;
+} s_bitmap_info;
+
+
+#define M4A_MAX_NODES 0x20
+
+// apparently it's 0xC bytes long
+typedef struct s_m4a_sound_head_list {
+	unsigned int size; 
+	unsigned int unk_4;
+	unsigned int unk_8;
+	s_m4a_sound_node list[0x20]
+} s_m4a_sound_head_list;
+
+// size == total nodes in the list
+
+typedef struct s_m4a_sound_node {
+	unsigned int index;
+	s_unknown_1 *g_struct;
+	unsigned int unk_8;
+	void* m4a_fptr;
+} s_m4a_sound_node;
+
+
+typedef struct s_fade_effect_config {
+	unsigned char unk_0;
+	unsigned char index;
+	unsigned char unk_1;
+	unsigned char unk_2;
+	unsigned short unk_3;
+	unsigned short unk_4;
+	unsigned short unk_5;
+	unsigned short unk_6;
+	unsigned int unk_7;
+	unsigned int unk_8;
+	unsigned int unk_9;
+	unsigned short unk_10;
+	unsigned short unk_11;
+	unsigned short unk_12;
+	unsigned short unk_13;
+} s_fade_effect_config;
+
+typedef struct s_fade_effect_node {
+	unsigned int unk_0;    
+	unsigned int unk_1;    
+	unsigned int unk_3;    
+	unsigned char unk_5;
+	unsigned char unk_6;
+	unsigned char unk_7;
+	unsigned char unk_8;
+} s_fade_effect_node;

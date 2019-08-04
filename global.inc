@@ -1,0 +1,17 @@
+ZeroFill equ 0x080008E0
+parse_bitmap_list equ 0x08000B30
+fptr_300E580 equ 0x080018C2
+is_fade_effect_enabled equ 0x080062F8
+set_background_configuration equ 0x080015FC
+configure_display_controller equ 0x08001778
+reset_display_bg_0123_x_y_offset equ 0x08001788
+reset_display_mosaic_size equ 0x080017A0
+render_setup_fade_effect_struct equ 0x08006270
+reset_rendering equ 0x08005F40
+reset_IWRAM_struct_unk_8005F6C equ 0x08005F6C
+init_2009A8A9_80027C4 equ 0x080027C4
+m4a_push_into_index_63h equ 0x08000630
+m4a_push_into_list equ 0x0800061E
+
+reset_vram_banks equ 0x080017AA
+reset_gfx_related equ 0x0800183C
