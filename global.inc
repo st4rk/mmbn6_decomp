@@ -15,3 +15,6 @@ m4a_push_into_list equ 0x0800061E
 
 reset_vram_banks equ 0x080017AA
 reset_gfx_related equ 0x0800183C
+debug_draw_text equ 0x080049FC
+debug_draw_text_init equ 0x80049E0
+debug_update_text_render equ 0x8004B28

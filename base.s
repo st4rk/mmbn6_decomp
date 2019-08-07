@@ -8,7 +8,7 @@
 crt0:
 	.include "crt0.s"
 
-; capcom logo state, it's the first state to run
+; capcom logo state, its the first state to run
 ; after to initialize the game engine
 
 capcom_logo:
@@ -16,6 +16,13 @@ capcom_logo:
 	.include "capcom_logo.s"
 	; .data used by capcom logo state
 	.include "capcom_logo_gfx.s"
+
+
+; only uncomment that line if you want to build
+; custom code hooks into the game engine
+custom_code:
+	; custom code for rom hacking
+	;.include "custom.s"
 
 .close
 

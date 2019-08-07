@@ -1,0 +1,63 @@
+
+structure size: 0x20
+typedef struct s_start_screen {
+	unsigned char state; // main state machine "state" 0x0
+	unsigned char unk_0; // title screen "state"       0x1
+	unsigned char is_continue_aval; // is_continue_available it'll draw the continue after press start
+	unsigned char unk_2; // 0x3
+	unsigned short main_title_timer; // 0x4 <-- some sort of "count"? maybe the "count" to show press start
+	unsigned char unk_5;
+	unsigned char unk_6;
+	unsigned char unk_7;
+	unsigned char unk_8;
+//	unsigned char unk_9;
+//	unsigned char unk_a;
+	unsigned short unk_9; // seems some sort of options?
+	unsigned char unk_b;
+	unsigned char unk_c;
+	unsigned char unk_d;
+	unsigned char unk_e;
+	unsigned char unk_f;
+	unsigned char unk_10;
+	unsigned char unk_11;
+	unsigned char unk_12;
+	unsigned char unk_13;
+	unsigned char unk_14;
+	unsigned char unk_15;
+	unsigned char unk_16;
+	unsigned char unk_17;
+	unsigned char unk_18;
+	unsigned char unk_19;
+	unsigned char unk_1a;
+	unsigned char unk_1b;
+	unsigned char unk_1c;
+	unsigned char unk_1d;
+	unsigned char unk_1e;
+} s_start_screen;
+
+
+
+
+
+
+
+s_start_screen + 0x4 == main_title_timer
+
+it'll count the timer for:
+	1. Display "Press Start"
+	2. If it goes to 0 (or reach? dunno lmao) and no one pressed any button
+	it'll go to Capcom Logo
+
+
+start screen has two state machine:
+
+
+1. deal with fade out (maybe when the player won't press anything and go back
+to capcom logo)
+2. sub "state" that is the main title screen
+
+
+0200AD10
+
+
+10 11 11 00 10 11 11 01 10 31 13 31 10 31 10 31 00 00 00

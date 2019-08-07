@@ -1,0 +1,25 @@
+
+struct s_unknown_1
+{
+  void *g_struct;
+  void *unk_200A270;
+  s_lcd_bg_io_conf *lcd_bg_io_conf_200AC40;
+  void *unk_2009980;
+  void *unk_2011C50;
+  void *unk_2011BB0;
+  void *unk_2034880;
+  s_window_io_conf *window_conf_200F3A0;
+  s_blending_io_conf *blending_io_conf_2009740;
+  _BYTE gap24[4];
+  void *gfx_related_30025C0;
+  void *unk_2009CD0;
+  void *unk_20384F0;
+  void *byte_2009A30;
+  void *unk_200A220;
+};
+
+
+
+unk_200A270 :
+	0x0 (first byte) hold the button pressed
+	
