@@ -18,7 +18,11 @@ capcom_logo:
 	.include "src/game/capcom_logo_gfx.s"
 
 start_screen:
+	; .text implementation
 	.include "src/game/start_screen.s"
+
+	; .data used by start screen and title screen state machines
+	.include "src/game/start_screen_gfx.s"
 
 ; only uncomment that line if you want to build
 ; custom code hooks into the game engine

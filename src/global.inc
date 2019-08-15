@@ -8,12 +8,11 @@ init_2009A8A9_80027C4 equ 0x080027C4
 m4a_push_into_index_63h equ 0x08000630
 m4a_push_into_list equ 0x0800061E
 
-reset_vram_banks equ 0x080017AA
-reset_gfx_related equ 0x0800183C
+engine_reset_charblock equ 0x080017AA
+engine_reset_vram_bank_E000 equ 0x0800183C
 debug_draw_text equ 0x080049FC
 debug_draw_text_init equ 0x80049E0
 debug_update_text_render equ 0x8004B28
-
 
 m4a_choose_track_number equ 0x080005F2
 m4a_play_sound_effect equ 0x80005CC
@@ -43,7 +42,7 @@ reset_200BC50 equ 0x0813F740
 engine_clear_200AD04 equ 0x0803F49C
 set_200AD06_to_78h_0 equ 0x0803F4E6
 
-main_title_screen_init_gState_and_timer equ 0x0803E8D4
-
 in_game_world_init_struct_and_unk_1 equ 0x08004DF0
 in_game_world_init_struct_and_unk_2 equ 0x08004D48
+
+memset_3 equ 0x080008B4

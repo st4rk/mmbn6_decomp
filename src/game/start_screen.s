@@ -7,12 +7,56 @@
 ; TODO: reverse 0x803E9F0
 ; TODO: EWRAM and IWRAM assembly files
 
-.org 0x0803E90C
+
+.org 0x0803E8D4
+
+
+; void __cdecl main_title_screen_init_gState_and_timer()
+main_title_screen_init_gState_and_timer: ; CODE XREF: engine_init+B8↑p
+                                        ; start_screen_main_title_reboot_or_next_state+40↑p ...
+                PUSH            {R4,LR}
+                LDR             R0, [g_main_title_screen_state_]
+                MOV             R4, R0
+                MOV             R1, #8
+                BL              memset_3
+                MOV             R0, #0xB4
+                STRB            R0, [R4,#(g_main_title_screen_timer - 0x200B1A0)]
+                POP             {R4,PC}
+.pool
+
+; void __cdecl main_title_screen_init_gState_and_timer_2()
+main_title_screen_init_gState_and_timer_2:
+                PUSH            {R4,LR}
+                LDR             R0, [g_main_title_screen_state_]
+                MOV             R4, R0
+                MOV             R1, #8
+                BL              memset_3
+                MOV             R0, #1
+                STRB            R0, [R4,#(g_main_title_screen_timer - 0x200B1A0)]
+                POP             {R4,PC}
+
+.pool
+
+g_main_title_screen_is_press_start_showing:
+                                        ; CODE XREF: start_screen_main_title_show+36↑p
+                LDR             R0, [g_main_title_screen_state_]
+                LDRB            R0, [R0]
+                CMP             R0, #2
+                MOV             PC, LR
+
+
+start_screen_always_eq_valid:            ; CODE XREF: start_screen_state_setup+54↑p
+                                        ; start_screen_state_setup+64↑p ...
+                MOV             R0, #0
+                TST             R0, R0
+                MOV             PC, LR
+.pool
+    
 
 g_main_title_update_global:              ; CODE XREF: start_screen_state_machine+2↑p
                                         ; capcom_logo_state_machine+E↑p
                 PUSH            {R4,LR}
-                LDR             R4, [g_main_title_screen_state]
+                LDR             R4, [g_main_title_screen_state_]
                 LDRB            R0, [R4]
                 CMP             R0, #1
                 BEQ             loc_803E920
@@ -22,7 +66,7 @@ g_main_title_update_global:              ; CODE XREF: start_screen_state_machine
                 B               locret_803E930
 
 loc_803E920:                             ; CODE XREF: g_main_title_update_global+8↑j
-                BL              0x803E94C
+                BL              sub_803E94C
                 BNE             locret_803E930
                 MOV             R0, #2
                 STRB            R0, [R4]
@@ -38,8 +82,122 @@ locret_803E930:                          ; CODE XREF: g_main_title_update_global
 
 .pool
 
-g_main_title_screen_state:
-	.word 0x0200B1A0
+g_main_title_screen_state_:
+	.word g_main_title_screen_state
+
+
+; void __cdecl g_main_title_screen_dec_timer_and_update_state()
+g_main_title_screen_dec_timer_and_update_state:
+                                        ; CODE XREF: g_main_title_update_global+E↑p
+                PUSH            {R4-R7,LR}
+                LDR             R5, [g_main_title_screen_state__]
+                LDRB            R0, [R5,#(g_main_title_screen_timer - 0x200B1A0)]
+                SUB             R0, #1
+                STRB            R0, [R5,#(g_main_title_screen_timer - 0x200B1A0)]
+                BNE             locret_803E948
+                MOV             R0, #1
+                STRB            R0, [R5]
+
+locret_803E948:                          ; CODE XREF: g_main_title_screen_dec_timer_and_update_state+A↑j
+                POP             {R4-R7,PC}
+
+.pool
+
+
+; TODO: reverse this function and the function called by it
+sub_803E94C:                            ; CODE XREF: g_main_title_update_global:loc_803E920↑p
+                PUSH            {R4-R7,LR}
+                LDR             R5, [g_main_title_screen_state__]
+                MOV             R6, #1
+                BL              start_screen_always_eq_valid
+                BNE             loc_803E9DE
+                BL              0x813F874
+                TST             R0, R0
+                BNE             loc_803E97C
+                BL              0x813F3EC
+                BEQ             loc_803E9DE
+                CMP             R0, #1
+                BEQ             loc_803E970
+                BL              0x814B194
+                B               loc_803E97C
+; ---------------------------------------------------------------------------
+
+loc_803E970:                             ; CODE XREF: sub_803E94C+1C↑j
+                BL              0x814B194
+                MOV             R0, #1
+                STRB            R0, [R5,#(byte_200B1A2 - 0x200B1A0)]
+                MOV             R6, #0
+                B               loc_803E9DE
+; ---------------------------------------------------------------------------
+
+loc_803E97C:                             ; CODE XREF: sub_803E94C+12↑j
+                                        ; sub_803E94C+22↑j
+                BL              read_200AD04_and_test
+                BNE             loc_803E99C
+                LDRB            R0, [R5,#(byte_200B1A1 - 0x200B1A0)]
+                TST             R0, R0
+                BNE             loc_803E99C
+                MOV             R0, #1
+                STRB            R0, [R5,#(byte_200B1A1 - 0x200B1A0)]
+                BL              engine_clear_200AD04
+                MOV             R0, #0
+                BL              0x803F684
+                BL              set_200AD06_to_78h
+                B               loc_803E9DE
+; ---------------------------------------------------------------------------
+
+loc_803E99C:                             ; CODE XREF: sub_803E94C+34↑j
+                                        ; sub_803E94C+3A↑j
+                MOV             R6, #0
+                MOV             R4, #1
+                BL              0x803F534
+                BEQ             loc_803E9BA
+                MOV             R6, #1
+                MOV             R4, #0
+                LDR             R1, [off_803E9EC]
+                LDRH            R0, [R1,#(word_200AD06 - 0x200AD04)]
+                TST             R0, R0
+                BEQ             loc_803E9B8
+                SUB             R0, #1
+                STRH            R0, [R1,#(word_200AD06 - 0x200AD04)]
+                B               loc_803E9DE
+; ---------------------------------------------------------------------------
+
+loc_803E9B8:                             ; CODE XREF: sub_803E94C+64↑j
+                MOV             R6, #0
+
+loc_803E9BA:                             ; CODE XREF: sub_803E94C+58↑j
+                MOV             R0, R4
+                BL              0x803F4C0
+                TST             R4, R4
+                BEQ             loc_803E9DE
+                MOV             R0, #1
+                MOV             R1, #0xE3
+                BL              0x802F164
+                BEQ             loc_803E9DE
+                MOV             R0, #0
+                MOV             R1, #0x7A ; 'z'
+                BL              0x802F110
+                MOV             R0, #0
+                MOV             R1, #0x7B ; '{'
+                BL              0x802F12C
+
+loc_803E9DE:                             ; CODE XREF: sub_803E94C+A↑j
+                                        ; sub_803E94C+18↑j ...
+                MOV             R0, R6
+                TST             R0, R0
+                POP             {R4-R7,PC}
+
+.pool
+
+    .word 0x20099D0
+g_main_title_screen_state__:
+    .word g_main_title_screen_state
+                                        ; DATA XREF: g_main_title_screen_dec_timer_and_update_state+2↑r
+                                        ; sub_803E94C+2↑r
+off_803E9EC:
+    .word 0x200AD04        ; DATA XREF: sub_803E94C+5E↑r
+
 
 
 .org 0x0802F544
@@ -437,3 +595,47 @@ locret_802F7E0:                          ; CODE XREF: start_screen_state_end+38�
 start_screen_end_disp_data_:
 	.word 0x1140              ; DATA XREF: start_screen_state_setup+8↑r
                                         ; start_screen_state_end+A↑r
+
+.org 0x0802FCC0
+
+
+start_screen_load_gfx:                  ; CODE XREF: start_screen_state_setup+16↑p
+                PUSH            {R4-R7,LR}
+                BL              engine_reset_charblock
+                LDR             R0, [title_screen_gfx_list_]
+                BL              parse_bitmap_list ; it'll get a "bitmap list"
+                                        ; ptr to data(or ptr to compressed data)
+                                        ; dst
+                                        ; size
+                BL              engine_reset_vram_bank_E000
+                POP             {R4-R7,PC}
+
+.pool
+
+title_screen_gfx_list_:
+    .word title_screen_capcom_copyright
+
+; title screen graphic information list
+title_screen_capcom_copyright:
+    .word 0x887F21EC, 0x6013000, 0x2013A00
+
+title_screen_capcom_copyright_palette:
+    .word 0x87F2C20, 0x3001610, 0x220
+
+title_screen_font: 
+    .word 0x887F1EBC, 0x6010020, 0x2013A00
+
+title_screen_font_palette: 
+    .word 0x87F216C, 0x3001590, 0x80
+
+title_screen_bg: 
+    .word 0x887F3040, 0x6000000, 0x2013A00
+
+title_screen_bg_palette:
+    .word 0x87F2E40, 0x3001960, 0x1C0
+
+title_screen_arrow:
+    .word 0x86A280C, 0x6012800, 0x180
+
+title_screen_arrow_palette:
+    .word 0x86A344C, 0x3001570, 0x20

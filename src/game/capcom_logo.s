@@ -228,8 +228,8 @@ capcom_logo_w_fade_out_disp_cnt:
 ; and more unknown stuff that I didn't check yet
 capcom_logo_state_init_gfx:             ; CODE XREF: capcom_logo_state_setup+36↑p
   PUSH            {R4-R7,LR}
-  BL              reset_vram_banks
-  BL              reset_gfx_related
+  BL              engine_reset_charblock
+  BL              engine_reset_vram_bank_E000
   LDR             R0, [off_803D2C0] ; address for capcom logo
   BL              parse_bitmap_list ; it'll get a "bitmap list"
   MOV             R0, #0

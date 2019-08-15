@@ -36,6 +36,39 @@ typedef struct s_start_screen {
 	unsigned char unk_1e;
 } s_start_screen;
 
+struct s_start_screen
+{
+  unsigned __int8 state;
+  unsigned __int8 main_title_state;
+  unsigned __int8 is_continue_aval;
+  unsigned __int8 unk_2;
+  unsigned __int16 main_title_timer;
+  unsigned __int8 green_arrow_oam_index;
+  unsigned __int8 unk_6;
+  unsigned __int8 oam_index;
+  unsigned __int8 unk_8;
+  unsigned __int16 achievements_flag;
+  unsigned __int8 achievements_total;
+  unsigned __int8 unk_c;
+  unsigned __int8 unk_d;
+  unsigned __int8 unk_e;
+  unsigned __int8 unk_f;
+  unsigned __int8 unk_10;
+  unsigned __int8 unk_11;
+  unsigned __int8 unk_12;
+  unsigned __int8 unk_13;
+  unsigned __int8 unk_14;
+  unsigned __int8 unk_15;
+  unsigned __int8 unk_16;
+  unsigned __int8 unk_17;
+  unsigned __int8 unk_18;
+  unsigned __int8 unk_19;
+  unsigned __int8 unk_1a;
+  unsigned __int8 unk_1b;
+  unsigned __int8 unk_1c;
+  unsigned __int8 unk_1d;
+  unsigned __int8 unk_1e;
+};
 
 
 
@@ -94,14 +127,9 @@ This work together with 0x0200B1A3
 
 The timer is used to know what is the next state for the main title screen
 
-
-
 nomeclature:
 
 main title = title screen
-
-
-
 
 TODO:
 	Reverse ROM:0802F756 start_screen_state_end
