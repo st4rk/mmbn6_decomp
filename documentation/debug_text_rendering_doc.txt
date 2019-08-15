@@ -1,5 +1,0 @@
-typedef struct text_info {
-	unsigned char x;
-	unsigned char y
-	unsigned char text;
-}
