@@ -3,10 +3,21 @@
 .relativeinclude on
 .open "base.gba", "output_base.gba", 0x08000000
 
+; <---------------------------------------
+; all engine code should be included here!
+; <---------------------------------------
+
 ; it will initialize the gba hardware enveriorment
 ; and jump into the main engine functino
 crt0:
 	.include "src/engine/crt0.s"
+
+core:
+	.include "src/engine/core.s"
+
+; <---------------------------------------
+; all game code should be included here!
+; <---------------------------------------
 
 ; capcom logo state, its the first state to run
 ; after to initialize the game engine

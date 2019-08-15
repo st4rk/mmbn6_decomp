@@ -39,7 +39,6 @@ reset_20094C0 equ 0x08001AFC
 reset_20097A0 equ 0x080023A8
 engine_interrupt_handle_and_serial_control_unk equ 0x08145C28
 reset_200BC50 equ 0x0813F740
-engine_clear_200AD04 equ 0x0803F49C
 set_200AD06_to_78h_0 equ 0x0803F4E6
 
 in_game_world_init_struct_and_unk_1 equ 0x08004DF0
