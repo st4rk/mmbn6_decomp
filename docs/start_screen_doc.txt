@@ -1,0 +1,108 @@
+
+structure size: 0x20 
+address: 0x0200AD10
+typedef struct s_start_screen {
+	unsigned char state; // main state machine "state" 0x0
+	unsigned char title_screen_state; // title screen "state"       0x1
+	unsigned char is_continue_aval; // is_continue_available it'll draw the continue after press start
+	unsigned char unk_2; // 0x3
+	unsigned short main_title_timer; // 0x4 <-- some sort of "count"? maybe the "count" to show press start
+	unsigned char green_arrow_oam_index;
+	unsigned char unk_6;
+	unsigned char oam_index;
+	unsigned char unk_8;
+//	unsigned char unk_9;
+//	unsigned char unk_a;
+	unsigned short achievements_flag; // archivement when you finish the game
+	unsigned char achievements_total;
+	unsigned char unk_c;
+	unsigned char unk_d;
+	unsigned char unk_e;
+	unsigned char unk_f;
+	unsigned char unk_10;
+	unsigned char unk_11;
+	unsigned char unk_12;
+	unsigned char unk_13;
+	unsigned char unk_14;
+	unsigned char unk_15;
+	unsigned char unk_16;
+	unsigned char unk_17;
+	unsigned char unk_18;
+	unsigned char unk_19;
+	unsigned char unk_1a;
+	unsigned char unk_1b;
+	unsigned char unk_1c;
+	unsigned char unk_1d;
+	unsigned char unk_1e;
+} s_start_screen;
+
+
+
+
+achievements bit mask:
+(aka Title Screen Icon)
+
+0x200 - beast link
+0x100 - unknown
+0x80 - greiga
+0x40 - std
+0x20 - mega
+0x10 - giga
+0x8 - secret
+0x4 - PA
+0x2 - bass
+
+s_start_screen + 0x4 == main_title_timer
+
+it'll count the timer for:
+	1. Display "Press Start"
+	2. If it goes to 0 (or reach? dunno lmao) and no one pressed any button
+	it'll go to Capcom Logo
+
+
+start screen has two state machine:
+
+
+1. deal with fade out (maybe when the player won't press anything and go back
+to capcom logo)
+2. sub "state" that is the main title screen
+
+
+0200AD10
+
+
+10 11 11 00 10 11 11 01 10 31 13 31 10 31 10 31 00 00 00
+
+
+0x0200B1A0 - g_main_title_screen_state
+
+A EWRAM variable (global) used to determine the main title screen state
+
+Value table:
+
+0x00 - We are in CAPCOM logo
+0x01 - We are in main title screen logo but without show the "PRESS START"
+0x02 - We are in main title screen logo but with "PRESS START"
+
+It seems to be used to control when the player can press any button and start
+the game
+
+
+This work together with 0x0200B1A3
+
+0x0200B1A3 - g_main_title_screen_timer
+
+The timer is used to know what is the next state for the main title screen
+
+
+
+nomeclature:
+
+main title = title screen
+
+
+
+
+TODO:
+	Reverse ROM:0802F756 start_screen_state_end
+	too painful for now

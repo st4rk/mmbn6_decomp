@@ -1,0 +1,132 @@
+
+size: 0x3C
+struct s_unknown_1
+{
+  void *g_struct;
+  void *funk_200A270;
+  s_lcd_bg_io_conf *lcd_bg_io_conf_200AC40;
+  void *unk_2009980; // camera related
+  void *unk_2011C50;
+  void *unk_2011BB0;
+  void *unk_2034880;
+  s_window_io_conf *window_conf_200F3A0;
+  s_blending_io_conf *blending_io_conf_2009740;
+  s_200A210* unk_20A210;
+  void *gfx_related_30025C0;
+  void *unk_2009CD0;
+  void *unk_20384F0;
+  void *byte_2009A30;
+  void *unk_200A220;
+  // data copied by 0x08006C22
+  unsigned int arr_unk_data[0x16];
+};
+
+
+
+typedef struct s_200A480 {
+  unsigned int unk_0;
+  unsigned int unk_1;
+  unsigned int unk_2;
+  unsigned int unk_3;
+};
+
+ROM:08006CAC index_table_unk DCD 0, 0x84, 0x108, 0x5F8
+ROM:08006CAC                                         ; DATA XREF: engine_init_toolkit_2+36↑o
+ROM:08006CAC                                         ; sub_8006C6C+16↑o ...
+ROM:08006CAC                 DCD 0x6B0, 0x15B4, 0x1748, 0x25CC
+ROM:08006CAC                 DCD 0x2610, 0x279C, 0x27B0, 0x27B4
+ROM:08006CAC                 DCD 0x27B8, 0x27C8, 0x2C4C, 0x2F0C
+ROM:08006CAC                 DCD 0x30A0, 0x32A4, 0x34A8, 0x34B0
+ROM:08006CAC                 DCD 0x34B8
+
+
+base address: 0x02001B80
+typedef struct s_EWRAM_list {
+  s_in_game_world *unk_02001B80;
+  void *unk_1;
+  void *unk_2;
+  void *unk_3;
+  void *unk_4;
+  void *unk_5;
+  void *unk_6;
+  void *unk_7;
+  void *unk_8;
+  void *unk_9;
+  void *unk_A;
+  void *unk_B;
+  void *unk_C;
+  void *unk_D;
+  void *unk_E;
+  void *unk_F;
+  void *unk_10;
+  void *unk_11;
+  void *unk_12;
+  void *unk_13;
+  void *unk_14;
+  void *unk_15;
+};
+
+struct 2011BB0
+seems to be related with stage, scene etc
+
+
+struct s_HID_200A270
+{
+  unsigned __int16 current_button_hold;
+  unsigned __int16 last_button_pressed;
+  unsigned __int16 last_button_pressed_2;
+  unsigned __int16 current_button_hold_2;
+  unsigned __int8 unk_7;
+  unsigned __int8 unk_8;
+  unsigned __int8 unk_9;
+  unsigned __int8 unk_a;
+  unsigned __int8 unk_b;
+};
+
+
+struct s_200A210
+{
+  unsigned short timer;
+  unsigned __int8 unk_2;
+  unsigned __int8 unk_3;
+  unsigned __int8 unk_4;
+  unsigned __int8 unk_5;
+  unsigned __int8 unk_6;
+  unsigned __int8 unk_7;
+  unsigned __int8 unk_8;
+  unsigned __int8 unk_9;
+  unsigned __int8 unk_a;
+  unsigned __int8 unk_b;
+};
+
+
+unk_200A270 :
+	0x0 (first byte) hold the button pressed
+	
+
+sound effect:
+
+0x66 - up down
+
+
+
+
+
+state list:
+
+0x0 - start screen / main title
+0x4 - in game
+0x8 - jack in
+0x10 - unknown 0
+0x14 - capcom logo state machine
+
+
+button bitmask
+
+0x20 - left
+0x10 - right
+0x40 - up
+0x80 - down
+
+0x08 - start
+0x02 - B

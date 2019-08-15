@@ -45,7 +45,6 @@ os.system(BUILD_COMMAND)
 
 print("[-] build done, sha1sum check")
 
-
 sha1_base = hash_file("base.gba")
 sha1_output = hash_file("output_base.gba")
 
