@@ -1,6 +1,6 @@
 
 size: 0x3C
-struct s_unknown_1
+struct s_core
 {
   void *g_struct;
   void *funk_200A270;

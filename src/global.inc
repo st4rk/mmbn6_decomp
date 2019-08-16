@@ -15,7 +15,7 @@ debug_draw_text_init equ 0x80049E0
 debug_update_text_render equ 0x8004B28
 
 m4a_choose_track_number equ 0x080005F2
-m4a_play_sound_effect equ 0x80005CC
+m4a_play_sound_effect_channel_80005cc equ 0x80005CC
 
 
 engine_regenerate_rng equ 0x0800151C
@@ -28,7 +28,7 @@ engine_reset_display_mosaic_size equ 0x080017A0
 engine_render_setup_fade_effect_struct equ 0x08006270
 engine_setup_gfx_anim_unk equ 0x8002354
 
-
+engine_update_oam_30068E8 equ 0x0802FE28
 
 ; sound engine
 engine_m4a_play_track_channel_number equ 0x080005F2
@@ -45,3 +45,6 @@ in_game_world_init_struct_and_unk_1 equ 0x08004DF0
 in_game_world_init_struct_and_unk_2 equ 0x08004D48
 
 memset_3 equ 0x080008B4
+
+; rendering related
+sub_8001B1C equ 0x8001B1C
