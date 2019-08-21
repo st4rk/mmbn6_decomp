@@ -184,7 +184,7 @@ _text_test:
 	.byte 0x0
 ;	.byte 0x13  ; x pos
 
-	.ascii "HACKED BY SHUFFLE2"
+	.ascii "ALEX ALTEA WHATEVER HACKED BY 1337"
 	.byte 0x0	
 	.byte 0x0
 
